@@ -1,0 +1,41 @@
+/* ============================================
+   移动端全局适配（≤768px）
+   一次性处理所有页面共用的 Element Plus 组件
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* 弹窗：宽度撑满、位置上移 */
+  .el-dialog {
+    width: 94% !important;
+    margin-top: 8vh !important;
+  }
+  .el-message-box { width: 90% !important; }
+
+  /* 表格：字号与单元格内边距缩小 */
+  .el-table { font-size: 12px; }
+  .el-table .cell { padding: 0 6px; }
+
+  /* 分页器：允许换行、缩小 */
+  .el-pagination { flex-wrap: wrap; row-gap: 8px; }
+  .el-pagination .el-pager li { min-width: 26px; }
+
+  /* 单选按钮组（排序等）：允许换行 */
+  .el-radio-group { flex-wrap: wrap; row-gap: 6px; }
+
+  /* 卡片内边距缩小 */
+  .el-card__body { padding: 12px; }
+
+  /* 表单：标签置顶，避免 label 挤压输入框 */
+  .el-form-item { flex-direction: column; align-items: stretch; }
+  .el-form-item__label { width: auto !important; justify-content: flex-start; }
+
+  /* 图片上传（发布商品）：卡片缩小 */
+  .el-upload--picture-card,
+  .el-upload-list--picture-card .el-upload-list__item {
+    width: 86px;
+    height: 86px;
+  }
+
+  /* 消息提示不遮挡顶部 */
+  .el-message { max-width: 92vw; }
+}

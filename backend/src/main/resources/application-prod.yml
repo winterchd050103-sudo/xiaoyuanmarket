@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysql:3306/xiaoyuan_market?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root123456}
+  data:
+    redis:
+      host: redis
+      password: ${REDIS_PASSWORD:redis123456}
+  rabbitmq:
+    host: rabbitmq
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+market:
+  upload-dir: /app/upload
+  # 生产建议 15 分钟；由环境变量注入
+  order-timeout-minutes: ${ORDER_TIMEOUT_MINUTES:15}
+  # 支付验签盐：公网部署务必通过环境变量更换
+  pay-salt: ${PAY_SALT:xiaoyuan-pay-salt-2026}
+
+jwt:
+  # HS256 密钥：公网部署务必通过环境变量更换（至少 48 字符随机串）
+  secret: ${JWT_SECRET:xiaoyuan-market-jwt-secret-key-please-change-in-production-0123456789}

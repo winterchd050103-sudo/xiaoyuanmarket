@@ -1,0 +1,38 @@
+server {
+    listen 80;
+    server_name _;
+
+    # ===== 商城前台（子路径部署 /market/）=====
+    location /market/ {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri $uri/ /market/index.html;
+    }
+    location = /      { return 302 /market/; }
+    location = /market { return 302 /market/; }
+
+    # ===== 后端接口（根 /api 保持不变：axios baseURL 与图片 URL 均无需改动）=====
+    location /api/ {
+        proxy_pass http://backend:8080/api/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        client_max_body_size 20m;
+    }
+
+    # ===== 其他应用接入示例（按需添加）=====
+    # location /app2/ {
+    #     proxy_pass http://app2:3000/;          # Web 应用：反代到对应容器
+    #     proxy_set_header Host $host;
+    #     proxy_set_header X-Real-IP $remote_addr;
+    # }
+    # location /blog/ {
+    #     alias /usr/share/nginx/apps/blog/;      # 纯静态应用：直接挂目录
+    #     index index.html;
+    # }
+
+    gzip on;
+    gzip_types text/plain text/css application/javascript application/json image/svg+xml;
+    gzip_min_length 1k;
+}
