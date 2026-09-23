@@ -7,7 +7,6 @@ dist/
 frontend/dist/
 target/
 backend/target/
-deploy-package/backend/target/
 
 # Compiled Java files
 *.class
@@ -45,9 +44,10 @@ backend/upload/
 # Deploy packages
 deploy-package.tar
 deploy-package.zip
+deploy-package/
 
-# Old code (if you don't want to track it)
-# OLD_CODE/
+# Old code
+OLD_CODE/
 
 # Documents
 校园二手交易平台项目开发规划书.docx
